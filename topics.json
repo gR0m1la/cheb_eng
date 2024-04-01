@@ -1,0 +1,34 @@
+{
+  "topics": [
+    {
+      "title": "Еда",
+      "words": [
+        {
+          "english": "apple",
+          "translation": "яблоко",
+          "example": "I eat an apple every day."
+        },
+        {
+          "english": "banana",
+          "translation": "банан",
+          "example": "She likes to eat bananas."
+        }
+      ]
+    },
+    {
+      "title": "Животные",
+      "words": [
+        {
+          "english": "cat",
+          "translation": "кот",
+          "example": "My sister has a cat."
+        },
+        {
+          "english": "dog",
+          "translation": "собака",
+          "example": "We walk our dog in the park."
+        }
+      ]
+    }
+  ]
+}

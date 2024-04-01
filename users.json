@@ -1,0 +1,22 @@
+{
+    "users": {
+        "123456789": {
+            "settings": {
+                "number_of_questions": 10
+            },
+            "statistics": {
+                "correct_answers": 5,
+                "total_questions": 10
+            }
+        },
+        "987654321": {
+            "settings": {
+                "number_of_questions": 5
+            },
+            "statistics": {
+                "correct_answers": 3,
+                "total_questions": 5
+            }
+        }
+    }
+}
