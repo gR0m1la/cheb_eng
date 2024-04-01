@@ -179,4 +179,5 @@ def webhook():
     return 'ok'
 
 if __name__ == '__main__':
+    set_webhook(bot_token, WEBHOOK_URL)
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 8080)), debug=True)
