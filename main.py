@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, request
 import requests
 import json
@@ -5,9 +7,10 @@ import random
 
 app = Flask(__name__)
 
-BOT_TOKEN = '7143458358:AAESxL1wBU7B5m7mEaTOK4aRvbLF71TwSxs'
-LOCAL_TUNNEL_URL = 'https://rude-houses-sit.loca.lt'
-WEBHOOK_URL = f'{LOCAL_TUNNEL_URL}/webhook'
+# BOT_TOKEN = '7143458358:AAESxL1wBU7B5m7mEaTOK4aRvbLF71TwSxs'
+bot_token = os.environ.get('BOT_TOKEN')
+# LOCAL_TUNNEL_URL = 'https://rude-houses-sit.loca.lt'
+WEBHOOK_URL = f'https://cheb-eng.onrender.com/webhook'
 
 USERS_FILE = 'users.json'
 
@@ -57,7 +60,7 @@ def parse_update(update):
     return chat_id, text
 
 def send_message(chat_id, text):
-    url = f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage'
+    url = f'https://api.telegram.org/bot{bot_token}/sendMessage'
     payload = {'chat_id': chat_id, 'text': text}
     response = requests.post(url, data=payload)
     print(response.text)
@@ -73,7 +76,7 @@ def start_menu(chat_id):
         'text': text,
         'reply_markup': json.dumps(keyboard)
     }
-    response = requests.post('https://api.telegram.org/bot{}/sendMessage'.format(BOT_TOKEN), data=payload)
+    response = requests.post('https://api.telegram.org/bot{}/sendMessage'.format(bot_token), data=payload)
     print(response.text)
 
 
@@ -89,7 +92,7 @@ def start_test(chat_id, topics):
         'text': "Выберите тему:",
         'reply_markup': json.dumps(keyboard)
     }
-    response = requests.post('https://api.telegram.org/bot{}/sendMessage'.format(BOT_TOKEN), data=payload)
+    response = requests.post('https://api.telegram.org/bot{}/sendMessage'.format(bot_token), data=payload)
     print(response.text)
 
 thought_word = None
@@ -124,7 +127,7 @@ def handle_topic_choice(chat_id, topics, topic_title):
             'text': f"Переведите слово: {word['english']}",
             'reply_markup': json.dumps(keyboard)
         }
-        response = requests.post('https://api.telegram.org/bot{}/sendMessage'.format(BOT_TOKEN), data=payload)
+        response = requests.post('https://api.telegram.org/bot{}/sendMessage'.format(bot_token), data=payload)
         print(response.text)
     else:
         send_message(chat_id, "Пожалуйста, выберите существующую тему.")
@@ -176,5 +179,4 @@ def webhook():
     return 'ok'
 
 if __name__ == '__main__':
-    set_webhook(BOT_TOKEN, WEBHOOK_URL)
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=True)
